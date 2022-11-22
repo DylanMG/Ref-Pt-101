@@ -9,7 +9,7 @@ date: "November 15 and 22, 2022"
 library(tidyverse)
 library(reshape2)
 source("source_ftns.r")
-knitr::opts_chunk$set(echo = T, warnings= F)
+knitr::opts_chunk$set(echo = TRUE, warnings= FALSE)
 ```
 
 ## Exercise 2: Estimating unfished biomass and MSY reference points using an age-structured model with a Beverton-Holt stock-recruit relationship
@@ -26,7 +26,7 @@ We will use outputs based on an example operating model that has been conditione
 
 We assume a Beverton-Holt stock-recruit relationship (Beverton and Holt 1957; Hilborn and Walters 1992, Ch 7). The stock-recruit pairs are plotted below and saved in the dataframe **SR**. The biological data (weight-at-age, maturity-at-age, *M*-at-age) and assumed selectivity-at-age are saved in the dataframe **BI**.
 
-```{r,warning=F, fig.show="hold", out.width="75%"}
+```{r, fig.show="hold", out.width="75%"}
 data <- readRDS("Ex2data.rda") # data is a list with model outputs and data
 
 # Dataframe SR with Year, SSB in kt, and age 0 recruitment in millions
@@ -61,8 +61,7 @@ P
 
 Age-structured models keep track of the number of fish that are alive at a given age and time (determined by recruitment, natural mortality and fishing mortality), the proportion mature at a given age (determined by the maturity-at-age schedule), as well as the proportion of fish that are vulnerable (or "available") to the fishery (determined by the vulnerability-at-age schedule). For this exercise, we assume these schedules are fixed in time. 
 
-```{r,warning=F, fig.show="hold", out.width="75%"}
-
+```{r, fig.show="hold", out.width="75%"}
 # Plot maturity-at-age and selectivity-at age
 matsel <- BI %>% 
   select(age,mat,sel) %>%
@@ -139,7 +138,7 @@ phiE0 <- sum(surv0*BI$waa*BI$mat) # This is Equation 2 at F = 0
 phiE0 # unfished SSB-per-recruit
 
 # R0 is an estimated parameter from the stock-recruit relationship
-SSB0 <- phiE0*R0 # SSB0 = unfished SSB-per-recruit * unfished number of recruits
+ SSB0 <- phiE0*R0 # SSB0 = unfished SSB-per-recruit * unfished number of recruits
 SSB0
 ```
 
